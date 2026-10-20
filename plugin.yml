@@ -1,0 +1,24 @@
+name: SMPKatana
+version: '1.0.0'
+main: com.smp.katana.KatanaPlugin
+api-version: '1.20'
+description: 15 unique leveling katanas with auras, pressure, F-key ultimates, paths and tasks.
+author: SMP
+softdepend: [ViaVersion, ViaBackwards, ViaRewind, Geyser-Spigot, floodgate]
+
+commands:
+  katana:
+    description: Main Katana command
+    aliases: [kt, katanas]
+    usage: /katana help
+
+permissions:
+  katana.use:
+    description: Use katanas, their abilities and player commands
+    default: true
+  katana.admin:
+    description: Give / revoke katanas, set levels, reload
+    default: op
+  katana.immune:
+    description: Immune to the left-hand pressure effect
+    default: false

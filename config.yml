@@ -1,0 +1,89 @@
+# ============================================================
+#  SMPKatana - config.yml
+# ============================================================
+prefix: "&8[&6Katana&8] &7"
+
+# Base item for every katana (any sword works)
+katana-material: NETHERITE_SWORD
+# Resource-pack hook: each katana gets CustomModelData = base + katana number (1-15)
+custom-model-data-base: 7000
+
+# true  = every katana exists only once on the server (old copies become "Sealed" if you re-issue/revoke)
+# false = admins can hand out as many copies of each katana as they like
+unique-mode: true
+
+# Dropped katanas never burn / despawn
+protect-dropped-items: true
+
+leveling:
+  max-level: 12            # tasks that need "level 12" assume this default
+  xp-base: 100             # XP needed for level 1 -> 2
+  xp-step: 75              # +this per level
+  xp-mob: 3                # passive mobs
+  xp-hostile: 10           # hostile mobs
+  xp-boss: 400             # Wither, Dragon, Warden, Elder Guardian
+  xp-player: 120           # killing a player
+  bonus-damage-per-level: 0.35
+  bonus-damage-per-stage: 1.0
+  announce-level: 8        # server-wide broadcast when a katana reaches this level (0 = off)
+  flush-ticks: 60          # how often progress is written to the item (prevents hand flicker)
+
+# Katana evolves one stage each time this many tasks are completed
+evolution:
+  stage-thresholds: [3, 6, 9, 12]
+
+# Level based aura: 1-3 small particles | 4-7 orbits + sounds | 8+ waves + lightning flashes
+aura:
+  enabled: true
+  interval-ticks: 4
+  tier2-level: 4
+  tier3-level: 8
+  lightning: true                  # visual-only lightning (no damage, no fire)
+  lightning-interval-ticks: 200
+
+# Katana held in the LEFT (off) hand -> pressure on nearby players
+pressure:
+  enabled: true
+  min-level: 4
+  radius: 8.0
+  radius-per-level: 0.4
+  slowness: true
+  slowness-amplifier: 0            # 0 = Slowness I (slight)
+  nausea: true
+  nausea-min-level: 6
+  heartbeat: true
+
+# F key = ultimate | Shift+F = normal hand swap
+ultimate:
+  enabled: true
+  min-level: 3
+  allow-command: true              # /katana ultimate (for Bedrock / players without an F key)
+  cooldown-seconds: 30
+  cooldown-reduction-per-stage: 3
+  min-cooldown-seconds: 8
+  xp-reward: 25
+  base-damage: 10.0
+  damage-per-level: 0.75
+  damage-per-stage: 2.0
+  damage-players: true             # still respects world PvP + protection plugins
+  disabled-worlds: []
+  slash:
+    length: 12
+    dash: true
+  storm:
+    duration-seconds: 8
+    radius: 10
+    change-weather: true           # temporary thunderstorm, restored afterwards
+  blast:
+    radius: 8                      # never breaks blocks
+
+# ViaVersion / ViaBackwards friendliness
+compat:
+  via-safe-particles: false        # true = skip 1.17+ only particles (snowflake, electric spark)
+
+# Console commands run when a task is completed. %player% and %katana% are available.
+# Task rewards can hand out new katanas ("random" = a katana that is still available).
+tasks:
+  rewards:
+    LEGEND_OF_THE_SMP:
+      - "katana give %player% random"
